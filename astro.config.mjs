@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // GitHub Pages 子路径。若以后绑定独立域名，改成 '/' 即可。
-const BASE = '/ColorLore';
+const BASE = '/color-poetry';
 
 /** 把 markdown 里相对路径的图片（images/xx/yy.png）改写为带 base 的绝对路径，并统一懒加载 */
 function remarkContentImages() {

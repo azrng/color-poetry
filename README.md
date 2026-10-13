@@ -1,8 +1,8 @@
-# ColorLore · 中国传统色
+# ColorPoetry · 中国传统颜色
 
 一个基于 [Astro](https://astro.build) 的中国传统颜色内容站：左侧是颜色列表，右侧是对应的文章内容，点开一个颜色，整个页面会染上它的底色。
 
-线上地址：https://azrng.github.io/ColorLore/
+线上地址：https://azrng.github.io/color-poetry/
 
 ## 新增一个颜色
 
@@ -31,7 +31,7 @@
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321/ColorLore/
+npm run dev      # http://localhost:4321/color-poetry/
 npm run build    # 构建产物在 dist/
 npm run preview  # 本地预览构建产物
 ```

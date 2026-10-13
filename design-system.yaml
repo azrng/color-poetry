@@ -1,12 +1,12 @@
 # 设计与界面规则的唯一事实来源。
-# 本文件已按 ColorLore 产品品牌定制：从 src/styles/global.css 的既有实现反向提炼，
+# 本文件已按 ColorPoetry 产品品牌定制：从 src/styles/global.css 的既有实现反向提炼，
 # 作为该实现的规范记录；后续界面改动先改本文件，再同步 global.css，最后改界面。
 # status 为「已定制」后 use-ai-rule 重新生成不再覆盖本文件；结构契约与定制流程见界面子规则的设计系统小节
 # 该文件面向人和 AI 共同使用：可读、可解析、非可执行、易于比对。
-# 适用范围：ColorLore（Astro 静态内容站，无表单、无后端）。
+# 适用范围：ColorPoetry（Astro 静态内容站，无表单、无后端）。
 
 meta:
-  name: "ColorLore 中国传统色设计系统"
+  name: "ColorPoetry 中国传统颜色设计系统"
   version: "1.0.0"
   status: "已定制"
   owners:
