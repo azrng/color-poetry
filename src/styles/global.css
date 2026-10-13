@@ -17,6 +17,9 @@
   --side: color-mix(in oklab, var(--accent) 20%, var(--paper));
   --deep: color-mix(in oklab, var(--accent) 40%, #221d15);
   --line: color-mix(in oklab, var(--accent) 38%, transparent);
+
+  /* 宣纸噪点：极淡的灰度颗粒，压住大面积纯色的数字平板感 */
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/></svg>");
 }
 
 * { box-sizing: border-box; }
@@ -30,6 +33,7 @@ body {
   margin: 0;
   min-height: 100dvh;
   background: var(--bg);
+  background-image: var(--grain);
   color: var(--ink);
   font-family: var(--sans);
   font-size: 16px;
@@ -43,9 +47,18 @@ body {
 }
 
 a:focus-visible,
-input:focus-visible {
+input:focus-visible,
+button:focus-visible {
   outline: 2px solid var(--deep);
   outline-offset: 2px;
+}
+
+/* 中文标题两端对齐换行，避免手机端末行孤字 */
+.color-head h1,
+.cover-head h1,
+.prose h2,
+.prose h4 {
+  text-wrap: balance;
 }
 
 /* ---------- 布局骨架 ---------- */
@@ -66,7 +79,8 @@ input:focus-visible {
   flex-direction: column;
   gap: 1.1rem;
   padding: 1.8rem 1.4rem 1.2rem;
-  background: var(--side);
+  background-color: var(--side);
+  background-image: var(--grain);
   border-right: 1px solid var(--line);
   transition: background-color 0.7s ease;
 }
@@ -224,6 +238,14 @@ input:focus-visible {
   color: var(--deep);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+/* ---------- 移动端顶栏与抽屉（桌面端隐藏，≤900px 启用） ---------- */
+
+.mobile-bar,
+.drawer-backdrop,
+.drawer-close {
+  display: none;
 }
 
 /* ---------- 文章页 ---------- */
@@ -638,6 +660,62 @@ input:focus-visible {
   font-variant-numeric: tabular-nums;
 }
 
+/* ---------- 页脚 ---------- */
+
+.site-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 1.5rem;
+  margin-top: 4.5rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.site-foot p {
+  margin: 0;
+}
+
+.site-foot a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+.site-foot a:hover {
+  color: var(--deep);
+}
+
+/* ---------- 404 ---------- */
+
+.notfound {
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+  justify-items: start;
+  padding: 2rem;
+}
+
+.notfound h1 {
+  margin: 0 0 0.6rem;
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 9vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--deep);
+}
+
+.notfound-sub {
+  margin: 0 0 1.8rem;
+  color: var(--ink-soft);
+}
+
+.notfound-home {
+  color: var(--deep);
+  text-underline-offset: 3px;
+}
+
 /* ---------- 响应式 ---------- */
 
 @media (max-width: 900px) {
@@ -645,46 +723,148 @@ input:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  .sidebar {
-    position: static;
-    height: auto;
-    gap: 0.9rem;
-    padding: 1.1rem;
-    border-right: 0;
+  /* 顶栏：品牌 + 颜色列表入口，吸顶跟随 */
+  .mobile-bar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 0.6rem max(1.1rem, env(safe-area-inset-right)) 0.6rem
+      max(1.1rem, env(safe-area-inset-left));
+    background-color: var(--side);
+    background-image: var(--grain);
     border-bottom: 1px solid var(--line);
+    transition: background-color 0.7s ease;
   }
 
-  .color-nav {
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 0.3rem;
+  .mobile-bar .brand-mark {
+    width: 2.1rem;
+    height: 2.1rem;
+    font-size: 1.1rem;
   }
 
-  .color-group {
-    display: contents;
+  .mobile-bar .brand-latin {
+    font-size: 0.62rem;
   }
 
-  .group-name {
+  .mobile-bar .brand-cn {
+    font-size: 1.02rem;
+  }
+
+  .drawer-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.75rem;
+    font: inherit;
+    font-size: 0.85rem;
+    color: var(--ink);
+    background: color-mix(in oklab, var(--accent) 12%, #ffffff);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  .drawer-toggle .ico rect:nth-child(1) { fill: var(--deep); }
+  .drawer-toggle .ico rect:nth-child(2) { fill: color-mix(in oklab, var(--accent) 45%, #ffffff); }
+  .drawer-toggle .ico rect:nth-child(3) { fill: color-mix(in oklab, var(--accent) 45%, transparent); }
+  .drawer-toggle .ico rect:nth-child(4) { fill: var(--accent); }
+
+  /* 侧栏变左侧抽屉：visibility 延迟切换保证关闭时不可聚焦 */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 60;
+    width: min(84vw, 20rem);
+    padding: 1.1rem 1.2rem 1.2rem;
+    border-right: 1px solid var(--line);
+    transform: translateX(-105%);
+    visibility: hidden;
+    transition:
+      transform 0.3s ease,
+      visibility 0s 0.3s,
+      background-color 0.7s ease;
+  }
+
+  .sidebar[data-open] {
+    transform: translateX(0);
+    visibility: visible;
+    box-shadow: 0 0 40px rgb(0 0 0 / 0.18);
+    transition:
+      transform 0.3s ease,
+      background-color 0.7s ease;
+  }
+
+  /* 抽屉内不重复品牌区与仓库链接，顶栏已有品牌入口 */
+  .sidebar .brand,
+  .sidebar .repo {
     display: none;
   }
 
+  .drawer-close {
+    align-self: flex-end;
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin: 0 0 0.6rem;
+    font-size: 1.3rem;
+    line-height: 1;
+    color: var(--ink);
+    background: color-mix(in oklab, var(--accent) 12%, #ffffff);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  .drawer-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgb(24 20 15 / 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+  }
+
+  .sidebar[data-open] + .drawer-backdrop {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+  }
+
+  /* 抽屉内恢复完整分组列表（含分组名与色值） */
   .color-item {
-    flex: none;
-    padding: 0.5rem 0.6rem;
-  }
-
-  .color-item .hexcode,
-  .repo {
-    display: none;
-  }
-
-  .list-empty {
-    flex: none;
+    padding: 0.5rem 0.7rem;
   }
 
   .article {
-    padding: 2.8rem 1.3rem 4rem;
+    padding: 1.7rem 1.3rem 4rem;
+  }
+
+  .color-head h1 {
+    font-size: clamp(2.5rem, 12vw, 3.4rem);
+  }
+
+  .cover {
+    padding: 2.2rem 1.1rem 4rem;
+  }
+
+  .cover-head h1 {
+    font-size: clamp(2.4rem, 11vw, 3.2rem);
+  }
+
+  .cover-tools {
+    gap: 0.7rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .cover-tools .color-search {
+    width: 100%;
   }
 
   .pager {
@@ -695,6 +875,34 @@ input:focus-visible {
   .pager-next {
     margin-left: 0;
   }
+
+  .lightbox-nav {
+    width: 2.6rem;
+    height: 3.2rem;
+  }
+
+  .lightbox-close {
+    top: max(0.9rem, env(safe-area-inset-top));
+  }
+}
+
+@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+  /* 抽屉内容错落入场 */
+  .sidebar[data-open] > * {
+    animation: drawer-item-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+
+  .sidebar[data-open] > :nth-child(2) { animation-delay: 0.03s; }
+  .sidebar[data-open] > :nth-child(3) { animation-delay: 0.06s; }
+  .sidebar[data-open] > :nth-child(4) { animation-delay: 0.09s; }
+  .sidebar[data-open] > :nth-child(n + 5) { animation-delay: 0.12s; }
+}
+
+@keyframes drawer-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(-0.8rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -704,6 +912,8 @@ input:focus-visible {
 
   body,
   .sidebar,
+  .mobile-bar,
+  .drawer-backdrop,
   .color-item,
   .tile-swatch,
   .family-chip {

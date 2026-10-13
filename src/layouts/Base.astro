@@ -11,16 +11,23 @@ interface Props {
 
 const { title, description, hex } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const ogUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
 <html lang="zh-CN" style={hex ? `--accent:${hex}` : undefined}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <meta property="og:site_name" content="ColorLore 中国传统色" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={ogUrl} />
+    <meta name="twitter:card" content="summary" />
     <meta name="theme-color" content={hex ?? '#f4f1ea'} />
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
     <ClientRouter />
@@ -86,6 +93,30 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
       if (e.key === 'ArrowLeft') step(-1);
       if (e.key === 'ArrowRight') step(1);
     });
+    // 触摸滑动切图：横向位移超阈值且明显大于纵向位移时翻页
+    let touchX = 0;
+    let touchY = 0;
+    box.addEventListener(
+      'touchstart',
+      (e) => {
+        const t = e.changedTouches[0];
+        touchX = t.clientX;
+        touchY = t.clientY;
+      },
+      { passive: true },
+    );
+    box.addEventListener(
+      'touchend',
+      (e) => {
+        const t = e.changedTouches[0];
+        const dx = t.clientX - touchX;
+        const dy = t.clientY - touchY;
+        if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          step(dx < 0 ? 1 : -1);
+        }
+      },
+      { passive: true },
+    );
     box.addEventListener('close', () => {
       document.body.style.overflow = '';
       box?.remove();

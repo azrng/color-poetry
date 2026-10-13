@@ -18,7 +18,33 @@ const searchable = (c: ColorItem) =>
   `${c.data.name} ${c.data.slug ?? c.id} ${c.data.hex} ${FAMILY_NAMES[colorFamily(c.data.hex)]}`.toLowerCase();
 ---
 
-<aside class="sidebar">
+{/* 移动端顶栏：桌面端隐藏，仅 ≤900px 显示 */}
+<header class="mobile-bar">
+  <a class="brand" href={`${base}/`}>
+    <span class="brand-mark" aria-hidden="true">色</span>
+    <span>
+      <span class="brand-latin">ColorLore</span>
+      <span class="brand-cn">中国传统色</span>
+    </span>
+  </a>
+  <button
+    class="drawer-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="color-drawer"
+  >
+    <svg class="ico" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+      <rect x="1" y="1" width="6.5" height="6.5" rx="2"></rect>
+      <rect x="8.5" y="1" width="6.5" height="6.5" rx="2"></rect>
+      <rect x="1" y="8.5" width="6.5" height="6.5" rx="2"></rect>
+      <rect x="8.5" y="8.5" width="6.5" height="6.5" rx="2"></rect>
+    </svg>
+    颜色列表
+  </button>
+</header>
+
+<aside class="sidebar" id="color-drawer">
+  <button class="drawer-close" type="button" aria-label="关闭颜色列表">×</button>
   <a class="brand" href={`${base}/`}>
     <span class="brand-mark" aria-hidden="true">色</span>
     <span>
@@ -64,12 +90,44 @@ const searchable = (c: ColorItem) =>
   </a>
 </aside>
 
+{/* 抽屉遮罩：点击关闭抽屉，桌面端隐藏 */}
+<div class="drawer-backdrop" aria-hidden="true"></div>
+
 <script>
   // 进入页面时把当前颜色滚动到可视区
   document.addEventListener('astro:page-load', () => {
     document
       .querySelector('.color-nav .color-item.active')
       ?.scrollIntoView({ block: 'nearest' });
+    // 视图过渡换页后兜底关闭抽屉，避免残留打开状态
+    setDrawer(false);
+  });
+
+  // 移动端抽屉开关：data-open 挂在侧栏上，换页后随新 DOM 自动回到关闭态
+  function setDrawer(open: boolean) {
+    const drawer = document.getElementById('color-drawer');
+    if (!drawer) return;
+    drawer.toggleAttribute('data-open', open);
+    document
+      .querySelector('.drawer-toggle')
+      ?.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  // 事件委托在 document 上，页面切换后依然有效
+  document.addEventListener('click', (e) => {
+    const t = e.target as Element;
+    if (t.closest('.drawer-toggle')) setDrawer(true);
+    else if (t.closest('.drawer-close') || t.closest('.drawer-backdrop')) setDrawer(false);
+    // 点选颜色后立即收起抽屉，给到即时反馈
+    else if (t.closest('.color-nav .color-item')) setDrawer(false);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (document.getElementById('color-drawer')?.hasAttribute('data-open')) {
+      setDrawer(false);
+    }
   });
 
   // 搜索过滤：事件委托在 document 上，页面切换后依然有效

@@ -8,12 +8,21 @@ import { fileURLToPath } from 'node:url';
 // GitHub Pages 子路径。若以后绑定独立域名，改成 '/' 即可。
 const BASE = '/ColorLore';
 
-/** 把 markdown 里相对路径的图片（images/xx/yy.png）改写为带 base 的绝对路径 */
+/** 把 markdown 里相对路径的图片（images/xx/yy.png）改写为带 base 的绝对路径，并统一懒加载 */
 function remarkContentImages() {
   return (tree) => {
     visit(tree, 'image', (node) => {
       if (/^(https?:|data:|#|\/)/i.test(node.url)) return;
       node.url = `${BASE}/${node.url.replace(/^(\.\.?\/)+/, '')}`;
+      // 文章配图较多且多为长图，统一懒加载降低移动端首屏负担
+      node.data = {
+        ...node.data,
+        hProperties: {
+          ...(node.data?.hProperties ?? {}),
+          loading: 'lazy',
+          decoding: 'async',
+        },
+      };
     });
   };
 }

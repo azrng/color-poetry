@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
+---
+
+<Base
+  title="此色未录 · 中国传统色"
+  description="你要找的页面不在色卡里。回到色卡墙继续浏览中国传统色。"
+>
+  <main class="notfound">
+    <p class="kicker">404</p>
+    <h1>此色未录</h1>
+    <p class="notfound-sub">你要找的页面不在色卡里，也许下一期就会收录。</p>
+    <a class="notfound-home" href={`${base}/`}>回到色卡墙</a>
+  </main>
+</Base>
