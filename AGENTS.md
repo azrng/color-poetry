@@ -1,7 +1,7 @@
 ---
 rule_id: agents-root
-version: 1.94.0
-last_updated: 2026-10-12
+version: 1.95.0
+last_updated: 2026-10-19
 dependencies: []
 ---
 
@@ -41,6 +41,7 @@ dependencies: []
 | `frontend-AGENTS.md` | 页面、视图、表单、交互、样式、数据层、前端 smoke test | 涉及任何用户界面、客户端交互或数据来源时 |
 | `doc-AGENTS.md` | 设计文档、数据口径与接口说明 | 涉及阶段 0、文档维护或数据口径时 |
 | `infra-AGENTS.md` | 构建脚本、环境变量、部署与发布链路 | 涉及构建、部署、环境变量或交付链路时 |
+| `doc/references/` | 颜色文章的引用资料（色值数据源、诗词典故、工艺史实、写作规范） | 新增或审查 `contents/*.md` 颜色文章前，先读 `doc/references/index.md` 命中的资料；仅查证用，不参与站点渲染 |
 
 - 发布或高风险改动：至少同时读当前文件和所有命中的子规则
 - 小规模规则修订或文案调整：命中后只读对应子规则的相关段落，不必通读全文

@@ -1,7 +1,7 @@
 ---
 rule_id: doc-agents
-version: 1.94.0
-last_updated: 2026-10-12
+version: 1.95.0
+last_updated: 2026-10-19
 dependencies: [agents-root]
 ---
 
@@ -10,7 +10,7 @@ dependencies: [agents-root]
 ## 适用范围
 
 - 作用域：需求文档、设计文档、契约说明、设计系统与开发文档维护
-- 触发场景：涉及阶段 0 设计、契约说明、`design-system.yaml`、`doc/index.md`、`doc/requirements/` 或 `doc/design/` 时阅读
+- 触发场景：涉及阶段 0 设计、契约说明、`design-system.yaml`、`doc/index.md`、`doc/requirements/`、`doc/design/` 或 `doc/references/` 时阅读
 
 ---
 
@@ -72,6 +72,15 @@ dependencies: [agents-root]
 - 表单与反馈组件规则
 - 明确的 `do / dont`
 - 若项目不含界面层，可省略或简化本文件
+
+---
+
+## 引用资料目录
+
+- `doc/references/` 存放撰写与审查 `contents/*.md` 颜色文章的引用资料，入口为 `doc/references/index.md`；当前收录色值数据源（`color-values.md`）、诗词典故（`poetry.md`）、工艺史实（`crafts.md`）与写作规范（`writing-style.md`）
+- 新增或审查颜色文章前，先读索引命中的资料，按其中的数据源与审查清单核对；不另起炉灶重复收集
+- 核查过的事实与来源须回写对应资料文件，带 URL 与核对日期；资料与文章冲突时，先记录口径差异再按选定口径修订
+- 本目录仅供查证，不进入 `contents/`，不得被 colors 内容集合构建；引用资料不渲染到站点界面
 
 ---
 
