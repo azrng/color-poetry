@@ -13,6 +13,7 @@
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | T4 | 颜色文章触发流程 + 藕荷骨架 | AGENTS.md 补「颜色名 hex」触发的内容任务规则；按新流程建 contents/藕荷.md 骨架与 images/ouhe 占位 | 交付验证 | ZCode | DONE | 中 | 2026-10-26 |
 | T5 | 栏目帖子填充规则 | AGENTS.md 补触发指令二：用户发栏目帖子时只落标题/正文/标签，丢弃图片提示词，保留固定图片引用并核对回写诗词资料 | 交付验证 | ZCode | DONE | 中 | 2026-10-26 |
+| T6 | 藕荷三栏目填充 | 按「颜色名 hex + 栏目帖子」流程完成藕荷.md 三栏目填充；诗词、服饰、瓷器、宋画史实分别回写 poetry.md / crafts.md | 交付验证 | ZCode | DONE | 中 | 2026-10-26 |
 | T3 | 接入 Microsoft Clarity 埋点 | 在全站布局 head 注入 Clarity 统计脚本（项目 ID yx38kdmcij） | 交付验证 | ZCode | DONE | 中 | 2026-10-13 |
 | T2 | 站点更名 ColorPoetry | 适配新仓库 color-poetry：BASE 路径、品牌文案、链接、README、包名，首页加新副标题 | 交付验证 | ZCode | DONE | 高 | 2026-10-13 |
 | T1 | 移动端适配 | 手机端改为抽屉式导航，补齐首页/文章页/灯箱移动端体验与图片懒加载，并按 redesign 技能完成视觉美化 | 交付验证 | ZCode | DONE | 高 | 2026-10-13 |
