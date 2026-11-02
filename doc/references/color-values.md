@@ -1,7 +1,7 @@
 ---
 doc_type: reference
 module: contents
-last_updated: 2026-10-19
+last_updated: 2026-11-02
 ---
 
 # 引用资料：颜色色值数据源
@@ -22,6 +22,7 @@ last_updated: 2026-10-19
 | --- | --- | --- | --- |
 | 靛青 | `#1661AB`（zhongguose） | `#177CB0`（box3.cn / colory.cc 等网络色表） | 两套网络色表不同源；本项目统一采用 zhongguose |
 | 月白 | `#EEF7F2`（现行项目值） | `#d6ecf0`（优设色表等） | 尚未定源，修订前先确认口径 |
+| 孔雀蓝 | `#0EB0C9`（zhongguose） | `#0F2CB3` / `#016795`（color-name.com、ArtyClick 等英文 peacock blue 色名站） | 英文 "Peacock Blue" 与中国传统色孔雀蓝并非同一色；本项目统一采用 zhongguose |
 
 ## 现值清单与核对状态
 
@@ -37,3 +38,4 @@ last_updated: 2026-10-19
 | 琥珀黄 | hupuhuang | #FEBA07 | 待核对 |
 | 海棠红 | haitanghong | #F03752 | 待核对 |
 | 靛青 | dianqing | #1661AB | 已核对：2026-10-19，zhongguose colors.json 返回 hex `#1661ab`、RGB 22,97,171、CMYK 100,60,8,1，一致 |
+| 孔雀蓝 | kongquelan | #0EB0C9 | 已核对：2026-11-02，zhongguose colors.json 返回 hex `#0eb0c9`、RGB 14,176,201、CMYK 92,0,28,0，一致 |
