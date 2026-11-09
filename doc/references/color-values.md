@@ -39,3 +39,4 @@ last_updated: 2026-11-02
 | 海棠红 | haitanghong | #F03752 | 待核对 |
 | 靛青 | dianqing | #1661AB | 已核对：2026-10-19，zhongguose colors.json 返回 hex `#1661ab`、RGB 22,97,171、CMYK 100,60,8,1，一致 |
 | 孔雀蓝 | kongquelan | #0EB0C9 | 已核对：2026-11-02，zhongguose colors.json 返回 hex `#0eb0c9`、RGB 14,176,201、CMYK 92,0,28,0，一致 |
+| 枫叶红 | fengyehong | #C21F30 | 已核对：2026-11-09，zhongguose colors.json 返回 hex `#c21f30`、RGB 194,31,48、CMYK 10,96,82,2，一致 |

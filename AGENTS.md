@@ -1,7 +1,7 @@
 ---
 rule_id: agents-root
-version: 1.95.0
-last_updated: 2026-10-19
+version: 1.96.0
+last_updated: 2026-11-09
 dependencies: []
 ---
 
@@ -85,10 +85,10 @@ dependencies: []
 
 1. 核对色值：按 `doc/references/color-values.md` 拉取 zhongguose `colors.json`，以 `pinyin` 检索比对 `hex`；不一致或查不到该颜色时停下向用户确认口径，不擅自定值
 2. 确定字段：`slug` 取数据源返回的拼音小写；`order` 取现有颜色最大 `order` + 1
-3. 创建 `contents/<颜色名>.md`：frontmatter 四字段（`name` / `slug` / `hex` / `order`）+ 三栏目结构（一色一诗 / 一色一源 / 一色一物），栏目骨架与文案规范按 `doc/references/writing-style.md` 执行
+3. 创建 `contents/<颜色名>.md`：只建骨架，不代写文案——frontmatter 四字段（`name` / `slug` / `hex` / `order`）+ 三个栏目小节（一色一诗 / 一色一源 / 一色一物），每栏目仅含空的 `### 标题`、`### 正文` 与固定图片引用（`images/<slug>/01-01.png` ~ `01-03.png`、`02-01.png`、`03-01.png` ~ `03-03.png`）；标题、正文、标签一律由用户后续以帖子形式提供（见触发指令二），AI 不预先撰写
 4. 创建图片目录 `contents/images/<slug>/`：固定 7 张，`01-01.png` ~ `01-03.png`（一色一诗 3 张）、`02-01.png`（一色一源 1 张）、`03-01.png` ~ `03-03.png`（一色一物 3 张）；图片由用户置入，目录可先以 `.gitkeep` 占位，图片就位后删除
-5. 自检：标签行 8 个且行首 `#` 转义为 `\#`；「三张壁纸」段描述与实际配图对应；图片引用路径与目录内文件名一致；核查过的事实与来源回写 `doc/references/` 对应文件（带 URL 与核对日期）
-6. 收口（用户置图后）：确认目录内 7 张与文中引用一一对应、正文无「待补」残留，删除 `.gitkeep`，提交图片并跑 `npm run build` 验证构建产物
+5. 自检：三栏目骨架与 7 条图片引用齐全，图片路径 `images/<slug>/NN-MM.png` 与目录内文件名一致；本阶段无正文文案，标签行、「三张壁纸」描述等文案规范待用户填充后（触发指令二）再按 `doc/references/writing-style.md` 审查；色值核对等已核实事实仍回写 `doc/references/` 对应文件（带 URL 与核对日期）
+6. 收口（用户置图、补稿后）：确认目录内 7 张与文中引用一一对应、各栏目标题 / 正文 / 标签已填充且无「待补」残留，删除 `.gitkeep`，提交图片并跑 `npm run build` 验证构建产物
 
 - 属既有内容集合的常规补充，不触发阶段 0 设计文档流程
 - 只发颜色名未发 hex 时：以数据源色值为准，并在交付说明中告知取值来源
