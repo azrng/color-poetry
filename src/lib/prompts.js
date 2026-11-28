@@ -14,16 +14,16 @@ export function loadPrompts(slug) {
   const raw = fs.readFileSync(file, 'utf8');
 
   const prompts = {};
-  // 匹配 `## ... → 01-01.png` 小节标题，正文（至下一小节或文末）为提示词
-  const sectionRe = /^## .*?→ *([0-9]{2}-[0-9]{2}\.png)\s*$/gm;
+  // 匹配 `## ... → 01-01.png` 小节标题；正文取到下一小节标题行「之前」（含其前导空行）
+  const sectionRe = /^## .*?→ *([0-9]{2}-[0-9]{2}\.png)[ \t]*$/gm;
   const marks = [];
   let match;
   while ((match = sectionRe.exec(raw)) !== null) {
-    marks.push({ file: match[1], start: match.index + match[0].length });
+    marks.push({ file: match[1], bodyStart: match.index, nextStart: match.index + match[0].length });
   }
   for (let i = 0; i < marks.length; i++) {
-    const stop = i + 1 < marks.length ? marks[i + 1].start : raw.length;
-    const body = raw.slice(marks[i].start, stop).trim();
+    const bodyEnd = i + 1 < marks.length ? marks[i + 1].bodyStart : raw.length;
+    const body = raw.slice(marks[i].nextStart, bodyEnd).trim();
     if (body) prompts[marks[i].file] = body;
   }
   return prompts;
