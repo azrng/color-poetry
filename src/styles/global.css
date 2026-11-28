@@ -512,6 +512,57 @@ button:focus-visible {
   font-size: 0.85rem;
 }
 
+/* 灯箱内的插画生成提示词折叠块 */
+.lightbox-caption .prompt-details {
+  display: inline-block;
+  max-width: min(92vw, 60rem);
+  text-align: left;
+}
+
+.lightbox-caption .prompt-details summary {
+  cursor: pointer;
+  color: rgb(255 255 255 / 0.85);
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.3em 0.9em;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.1);
+  transition: background-color 0.25s ease;
+}
+
+.lightbox-caption .prompt-details summary::before {
+  content: '✦';
+  font-size: 0.8em;
+}
+
+.lightbox-caption .prompt-details summary:hover {
+  background: rgb(255 255 255 / 0.2);
+}
+
+.lightbox-caption .prompt-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.lightbox-caption .prompt-details[open] summary {
+  background: rgb(255 255 255 / 0.16);
+}
+
+.lightbox-caption .prompt-details p {
+  margin: 0.7em auto 0;
+  max-width: 60em;
+  max-height: 9rem;
+  overflow-y: auto;
+  line-height: 1.75;
+  color: rgb(255 255 255 / 0.72);
+  background: rgb(255 255 255 / 0.06);
+  border-radius: 10px;
+  padding: 0.75em 1em;
+  text-align: justify;
+  scrollbar-width: thin;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .lightbox[open] {
     animation: lightbox-in 0.25s ease;

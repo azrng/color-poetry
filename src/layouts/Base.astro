@@ -58,12 +58,45 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site);
     view.src = source.currentSrc || source.src;
     view.alt = source.alt;
     const caption = box.querySelector('.lightbox-caption');
-    if (caption) caption.textContent = source.alt;
+    if (caption) {
+      // 有生成提示词时展示「图题 + 提示词」，否则退回 alt 文本
+      const promptsMap = getPromptsMap(source);
+      const fileName = promptKeyOf(source);
+      const prompt = promptsMap?.[fileName];
+      caption.innerHTML = prompt
+        ? `<details class="prompt-details"><summary>插画生成提示词</summary><p>${escapeHtml(prompt)}</p></details>`
+        : escapeHtml(source.alt);
+    }
     const multiple = images.length > 1;
     const counter = box.querySelector('.lightbox-counter');
     if (counter) counter.textContent = multiple ? `${index + 1} / ${images.length}` : '';
     box.querySelector('.lightbox-prev')?.toggleAttribute('hidden', !multiple);
     box.querySelector('.lightbox-next')?.toggleAttribute('hidden', !multiple);
+  }
+
+  /** 从图片所在文章容器读提示词映射（{ '01-01.png': '…' }） */
+  function getPromptsMap(img: HTMLImageElement): Record<string, string> | null {
+    const scope = img.closest('.prose');
+    const raw = scope?.getAttribute('data-prompts');
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw) as Record<string, string>;
+    } catch {
+      return null;
+    }
+  }
+
+  /** 从图片 URL 提取 01-01.png 这类文件名作为提示词键 */
+  function promptKeyOf(img: HTMLImageElement): string {
+    return img.currentSrc.split('/').pop()?.split('#')[0]?.split('?')[0] ?? '';
+  }
+
+  function escapeHtml(text: string): string {
+    return text
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;');
   }
 
   function step(delta: number) {
@@ -92,8 +125,8 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site);
     box.querySelector('.lightbox-next')?.addEventListener('click', () => step(1));
     box.querySelector('.lightbox-img')?.addEventListener('click', () => box?.close());
     box.addEventListener('click', (e) => {
-      // 点到空白遮罩处关闭
-      if (!(e.target as Element).closest('.lightbox-img, .lightbox-nav, .lightbox-close')) {
+      // 点到空白遮罩处关闭；提示词折叠块（summary/正文滚动）不关闭
+      if (!(e.target as Element).closest('.lightbox-img, .lightbox-nav, .lightbox-close, .prompt-details')) {
         box?.close();
       }
     });
