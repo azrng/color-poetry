@@ -1,7 +1,7 @@
 ---
 doc_type: reference
 module: contents
-last_updated: 2026-10-19
+last_updated: 2026-11-28
 ---
 
 # 引用资料索引
@@ -10,13 +10,16 @@ last_updated: 2026-10-19
 
 | 文件 | 内容 | 用途 |
 | --- | --- | --- |
-| [color-values.md](color-values.md) | 色值数据源（zhongguose.com JSON）、口径差异、十色核对状态 | 核对 frontmatter `hex` |
-| [poetry.md](poetry.md) | 《枫桥夜泊》原文与通行释义、《诗经》《荀子》引文、来源链接 | 核对诗词引用 |
-| [crafts.md](crafts.md) | 蓝染 / 制靛化学机理、蓝印花布工艺与非遗背景、来源链接 | 核对工艺史实描述 |
+| [color-values.md](color-values.md) | 色值数据源（zhongguose.com JSON）、口径差异、十六色核对状态 | 核对 frontmatter `hex`；决定文章参考资料节能否列色值源 |
+| [poetry.md](poetry.md) | 《枫桥夜泊》等诗词原文与通行释义、来源链接 | 核对诗词引用 |
+| [crafts.md](crafts.md) | 蓝染/制靛、蓝印花布、景泰蓝、孔雀蓝釉、龙泉窑、黄釉瓷等工艺史实、来源链接 | 核对工艺史实描述 |
 | [writing-style.md](writing-style.md) | 系列三栏目结构、固定骨架、审查清单、已知待处理项 | 审查文案结构与质量 |
+| [prompts/<slug>.md](prompts/) | 各色插画提示词归档（一色一诗 3 段 + 一色一源六格册页 + 一色一物 3 段） | 生成/重生成插画；站点灯箱「插画生成提示词」的数据源（构建时经 `src/lib/prompts.js` 注入） |
 
 ## 维护规则
 
 - 新增颜色文章时，把当次核查过的事实与来源补入对应文件；引用须带 URL 与核对日期
+- 触发指令二填充栏目时：图片提示词**不写入文章 md**，按 `prompts/<slug>.md` 既有格式归档——小节标题 `## <栏目> · 图N《图题》 → NN-MM.png`，箭头后文件名必须与文章图片引用一致；多格分镜帖落「最终整图提示词」，分镜原文收进 `<details>` 折叠块
+- 文末「参考资料」节只收可靠源（官方机构 > 权威媒体/期刊 > 权威整理本）；内容农场、个人博客、可编辑百科不入选；条目 URL 逐字取自本目录资料文件，禁止构造
 - 色值或史实与资料冲突时，先在文件内记录口径差异，再按选定口径修订文章
 - 本目录文件不进入 `contents/`，避免被 Astro colors 集合当作颜色文章构建
