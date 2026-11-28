@@ -1,7 +1,7 @@
 ---
 doc_type: reference
 module: contents
-last_updated: 2026-11-22
+last_updated: 2026-11-28
 ---
 
 # 引用资料：颜色色值数据源
@@ -42,3 +42,4 @@ last_updated: 2026-11-22
 | 枫叶红 | fengyehong | #C21F30 | 已核对：2026-11-09，zhongguose colors.json 返回 hex `#c21f30`、RGB 194,31,48、CMYK 10,96,82,2，一致 |
 | 茉莉黄 | molihuang | #F8DF72 | 已核对：2026-11-13，zhongguose colors.json 返回 hex `#f8df72`、RGB 248,223,114、CMYK 4,13,67,0，一致 |
 | 松霜绿 | songshuanglv | #83A78D | 已核对：2026-11-22，zhongguose colors.json 返回 hex `#83a78d`、RGB 131,167,141、CMYK 61,19,52,3，一致 |
+| 景泰蓝 | jingtailan | #2775B6 | 已核对：2026-11-28，zhongguose colors.json 返回 hex `#2775b6`、RGB 39,117,182、CMYK 95,46,10,1，一致（https://zhongguose.com/colors.json） |
