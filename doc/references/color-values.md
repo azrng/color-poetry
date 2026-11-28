@@ -28,15 +28,15 @@ last_updated: 2026-11-28
 
 | 颜色 | slug | 项目 hex | 核对状态 |
 | --- | --- | --- | --- |
-| 赤金 | chijin | #EACD76 | 待核对 |
-| 月白 | yuebai | #EEF7F2 | 待核对（存在口径冲突，见上表） |
-| 朱红 | zhuhong | #ED5126 | 待核对 |
-| 霁青 | jiqing | #63BBD0 | 待核对 |
-| 栀子黄 | zhizihuang | #EBB10D | 待核对 |
-| 竹绿 | zhulv | #1BA784 | 待核对 |
-| 青莲 | qinglian | #8B2671 | 待核对 |
-| 琥珀黄 | hupuhuang | #FEBA07 | 待核对 |
-| 海棠红 | haitanghong | #F03752 | 待核对 |
+| 赤金 | chijin | #EACD76 | 已核对：2026-11-28，zhongguose colors.json 检索不到 `chijin`，hex `#eacd76` 不存在于该数据源——项目值与选定数据源无法互证，引用该色时**不得**在参考资料节列色值源；待用户提供初始出处或确认改值 |
+| 月白 | yuebai | #EEF7F2 | 已核对：2026-11-28，zhongguose colors.json 返回 hex `#eef7f2`、RGB 238,247,242、CMYK 11,0,8,0，与项目值一致；网络色表冲突口径仍见上表 |
+| 朱红 | zhuhong | #ED5126 | 已核对：2026-11-28，zhongguose colors.json 返回 hex `#ed5126`、RGB 237,81,38、CMYK 0,78,83,0，一致 |
+| 霁青 | jiqing | #63BBD0 | 已核对：2026-11-28，zhongguose colors.json 返回 hex `#63bbd0`、RGB 99,187,208、CMYK 74,2,24,0，一致 |
+| 栀子黄 | zhizihuang | #EBB10D | 已核对：2026-11-28，zhongguose colors.json 返回 hex `#ebb10d`、RGB 235,177,13、CMYK 3,36,99,0，一致 |
+| 竹绿 | zhulv | #1BA784 | 已核对：2026-11-28，zhongguose colors.json 返回 hex `#1ba784`、RGB 27,167,132、CMYK 96,0,64,0，一致 |
+| 青莲 | qinglian | #8B2671 | 已核对：2026-11-28，zhongguose colors.json 返回 hex `#8b2671`、RGB 139,38,113、CMYK 43,97,19,8，一致 |
+| 琥珀黄 | hupuhuang | #FEBA07 | 已核对：2026-11-28，zhongguose colors.json 返回名称「琥珀黄」hex `#feba07`、RGB 254,186,7、CMYK 0,34,93,0，hex 一致；数据源拼音为 `hupohuang`，项目 slug 为 `hupuhuang`（沿用于 URL，不改动） |
+| 海棠红 | haitanghong | #F03752 | 已核对：2026-11-28，zhongguose colors.json 返回 hex `#f03752`、RGB 240,55,82、CMYK 0,86,55,0，一致 |
 | 靛青 | dianqing | #1661AB | 已核对：2026-10-19，zhongguose colors.json 返回 hex `#1661ab`、RGB 22,97,171、CMYK 100,60,8,1，一致 |
 | 孔雀蓝 | kongquelan | #0EB0C9 | 已核对：2026-11-02，zhongguose colors.json 返回 hex `#0eb0c9`、RGB 14,176,201、CMYK 92,0,28,0，一致 |
 | 枫叶红 | fengyehong | #C21F30 | 已核对：2026-11-09，zhongguose colors.json 返回 hex `#c21f30`、RGB 194,31,48、CMYK 10,96,82,2，一致 |
